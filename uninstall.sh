@@ -43,6 +43,26 @@ if [[ "$response" =~ ^(yes|y)$ ]]
      printf "${LIGHTRED}Nothing to remove ${BLUE}php-mysql${NC} ${LIGHTRED}is not installed.${NC}\n"
    fi
    # End php-mysql
+   # Check if drush is installed.
+   if yum list installed "drush" >/dev/null 2>&1; then
+     printf "${RED}Removing drush...${NC}\n"
+     # Remove drush plugin.
+     sudo yum remove drush -y
+     printf "${GREEN}drush has been successfully removed!${NC}\n"
+    else
+     printf "${LIGHTRED}Nothing to remove ${BLUE}drush${NC} ${LIGHTRED}is not installed.${NC}\n"
+    fi
+    # End drush
+    # Check if mysql-community-server is installed.
+   if yum list installed "mysql-community-server" >/dev/null 2>&1; then
+     printf "${RED}Removing mysql-community-server...${NC}\n"
+     # Remove mysql-community-server plugin.
+     sudo yum remove mysql-community-server -y
+     printf "${GREEN}mysql-community-server has been successfully removed!${NC}\n"
+    else
+     printf "${LIGHTRED}Nothing to remove ${BLUE}mysql-community-server${NC} ${LIGHTRED}is not installed.${NC}\n"
+    fi
+    # End mysql-community-server
 else
   printf  "${RED}You canceled it ${GREEN}${CURRENTUSER}!${NC}\n"
 fi
