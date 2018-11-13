@@ -13,6 +13,15 @@ read -r -p  "Do you want to proceed? [y/N]: " response
 
 if [[ "$response" =~ ^(yes|y)$ ]]
  then
+   # Check if user exists.
+   if id -u openideal_user >/dev/null 2>&1; then
+     # Delete User.
+     printf "${RED}Deleting user openideal_user...${NC}\n"
+     sudo userdel -r openideal_user
+     printf "${GREEN}openideal_user has been succesfully deleted!${NC}\n"
+   else 
+    printf "${LIGHTRED}Nothing to remove user ${BLUE}openideal_user${NC} ${LIGHTRED}is not existing.${NC}\n" 
+   fi
    # Check if httpd is installed.
    if yum list installed "httpd" >/dev/null 2>&1; then
      printf "${RED}Removing httpd...${NC}\n"
